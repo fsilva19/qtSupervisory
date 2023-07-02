@@ -12,6 +12,11 @@ MainWindow::MainWindow(QWidget *parent) :
           SIGNAL(clicked(bool)),
           this,
           SLOT(putData()));
+
+  connect(ui->horizontalSlider_Timing,
+          SIGNAL(valueChanged(int)),
+          ui->label_TimingVariavel,
+          SLOT(display(int)));
 }
 
 void MainWindow::tcpConnect(){

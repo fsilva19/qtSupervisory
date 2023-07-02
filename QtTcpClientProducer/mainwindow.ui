@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>463</width>
-    <height>252</height>
+    <width>468</width>
+    <height>427</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="pushButtonPut">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>60</y>
+      <x>300</x>
+      <y>300</y>
       <width>101</width>
       <height>29</height>
      </rect>
@@ -27,14 +27,154 @@
      <string>putData</string>
     </property>
    </widget>
+   <widget class="QLineEdit" name="lineEdit_ipServ">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>201</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Update">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>260</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Update</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_ip">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>IP do servidor</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_Time">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>290</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Timing</string>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="listWidget_maquinas">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>100</y>
+      <width>201</width>
+      <height>151</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Start">
+    <property name="geometry">
+     <rect>
+      <x>7</x>
+      <y>330</y>
+      <width>99</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Start</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Stop">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>330</y>
+      <width>98</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Stop</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="horizontalSlider_Timing">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>310</y>
+      <width>181</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <number>100</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_TimingVariavel">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>310</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </widget>
+   <widget class="QSplitter" name="splitter">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>201</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+    <widget class="QPushButton" name="pushButton_Connect">
+     <property name="text">
+      <string>Connect</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_Disconnect">
+     <property name="text">
+      <string>Disconnect</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>463</width>
-     <height>23</height>
+     <width>468</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>
