@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>468</width>
+    <width>488</width>
     <height>427</height>
    </rect>
   </property>
@@ -14,19 +14,6 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="pushButtonPut">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>300</y>
-      <width>101</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>putData</string>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="lineEdit_ipServ">
     <property name="geometry">
      <rect>
@@ -141,7 +128,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>1</string>
+     <string>0</string>
     </property>
    </widget>
    <widget class="QSplitter" name="splitter">
@@ -167,14 +154,24 @@
      </property>
     </widget>
    </widget>
+   <widget class="QGraphicsView" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>40</y>
+      <width>256</width>
+      <height>271</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>468</width>
-     <height>21</height>
+     <width>488</width>
+     <height>20</height>
     </rect>
    </property>
   </widget>
@@ -190,5 +187,22 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>horizontalSlider_Timing</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_TimingVariavel</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>37</x>
+     <y>354</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>207</x>
+     <y>353</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
