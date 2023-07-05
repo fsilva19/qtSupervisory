@@ -32,6 +32,11 @@ MainWindow::MainWindow(QWidget *parent) :
           ui->lcdNumber_max,
           SLOT(display(int)));
 
+  connect(ui->horizontalSlider_intervalo,
+          SIGNAL(valueChanged(int)),
+          ui->label_intervaloInt,
+          SLOT(setNum(int)));
+
 }
 
 void MainWindow::copia(){ //envia o endereço IP
