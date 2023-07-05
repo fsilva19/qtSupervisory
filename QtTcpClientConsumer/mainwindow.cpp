@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
   //CÓPIA DO TEXTO IP:
   connect(ui->pushButton_Connect,
           SIGNAL(clicked()),
-          SLOT(copia()));
+          SLOT(tcpConnect()));
 
   //H_SLIDER MINIMO
   connect(ui->horizontalSlider_min,
@@ -32,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
           ui->lcdNumber_max,
           SLOT(display(int)));
 
+  //H_SLIDER INTERVALO
   connect(ui->horizontalSlider_intervalo,
           SIGNAL(valueChanged(int)),
           ui->label_intervaloInt,
@@ -48,6 +49,7 @@ void MainWindow::tcpConnect(){
   socket->connectToHost("127.0.0.1",1234);
   if(socket->waitForConnected(3000)){
     qDebug() << "Connected";
+      statusBar()->showMessage("Conectado");
   }
   else{
     qDebug() << "Disconnected";
