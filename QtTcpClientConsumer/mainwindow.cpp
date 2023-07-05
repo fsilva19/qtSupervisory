@@ -15,8 +15,12 @@ MainWindow::MainWindow(QWidget *parent) :
           this,
           SLOT(getData()));
 
-  //CÓPIA DO TEXTO IP:
+  //tcp conectado:
   connect(ui->pushButton_Connect,
+          SIGNAL(clicked()),
+          SLOT(tcpConnect()));
+  //tcp desconectado:
+  connect(ui->pushButton_Disconnect,
           SIGNAL(clicked()),
           SLOT(tcpConnect()));
 
@@ -40,19 +44,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
 }
 
-void MainWindow::copia(){ //envia o endereço IP
-  ui->textEdit_exibidorDeDados->setText(
-      ui->lineEdit_ip->text());
-}
-
 void MainWindow::tcpConnect(){
-  socket->connectToHost("127.0.0.1",1234);
+  socket->connectToHost(ui->lineEdit_ip->text(),1234);
   if(socket->waitForConnected(3000)){
     qDebug() << "Connected";
-      statusBar()->showMessage("Conectado");
+      statusBar()->showMessage("Connected");
   }
   else{
     qDebug() << "Disconnected";
+      statusBar()->showMessage("Disconnected");
   }
 }
 

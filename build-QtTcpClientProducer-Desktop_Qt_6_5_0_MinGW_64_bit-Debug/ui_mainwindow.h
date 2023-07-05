@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
@@ -29,7 +30,6 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QPushButton *pushButtonPut;
     QLineEdit *lineEdit_ipServ;
     QPushButton *pushButton_Update;
     QLabel *label_ip;
@@ -38,10 +38,11 @@ public:
     QPushButton *pushButton_Start;
     QPushButton *pushButton_Stop;
     QSlider *horizontalSlider_Timing;
-    QLabel *label_TimingVarivael;
+    QLabel *label_TimingVariavel;
     QSplitter *splitter;
     QPushButton *pushButton_Connect;
     QPushButton *pushButton_Disconnect;
+    QGraphicsView *graphicsView;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -50,12 +51,9 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(468, 427);
+        MainWindow->resize(488, 427);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName("centralWidget");
-        pushButtonPut = new QPushButton(centralWidget);
-        pushButtonPut->setObjectName("pushButtonPut");
-        pushButtonPut->setGeometry(QRect(300, 300, 101, 29));
         lineEdit_ipServ = new QLineEdit(centralWidget);
         lineEdit_ipServ->setObjectName("lineEdit_ipServ");
         lineEdit_ipServ->setGeometry(QRect(10, 30, 201, 24));
@@ -80,10 +78,12 @@ public:
         horizontalSlider_Timing = new QSlider(centralWidget);
         horizontalSlider_Timing->setObjectName("horizontalSlider_Timing");
         horizontalSlider_Timing->setGeometry(QRect(10, 310, 181, 16));
+        horizontalSlider_Timing->setMinimum(1);
+        horizontalSlider_Timing->setMaximum(100);
         horizontalSlider_Timing->setOrientation(Qt::Horizontal);
-        label_TimingVarivael = new QLabel(centralWidget);
-        label_TimingVarivael->setObjectName("label_TimingVarivael");
-        label_TimingVarivael->setGeometry(QRect(200, 310, 16, 16));
+        label_TimingVariavel = new QLabel(centralWidget);
+        label_TimingVariavel->setObjectName("label_TimingVariavel");
+        label_TimingVariavel->setGeometry(QRect(200, 310, 16, 16));
         splitter = new QSplitter(centralWidget);
         splitter->setObjectName("splitter");
         splitter->setGeometry(QRect(10, 60, 201, 24));
@@ -94,10 +94,13 @@ public:
         pushButton_Disconnect = new QPushButton(splitter);
         pushButton_Disconnect->setObjectName("pushButton_Disconnect");
         splitter->addWidget(pushButton_Disconnect);
+        graphicsView = new QGraphicsView(centralWidget);
+        graphicsView->setObjectName("graphicsView");
+        graphicsView->setGeometry(QRect(220, 40, 256, 271));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName("menuBar");
-        menuBar->setGeometry(QRect(0, 0, 468, 21));
+        menuBar->setGeometry(QRect(0, 0, 488, 20));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName("mainToolBar");
@@ -114,13 +117,12 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        pushButtonPut->setText(QCoreApplication::translate("MainWindow", "putData", nullptr));
         pushButton_Update->setText(QCoreApplication::translate("MainWindow", "Update", nullptr));
         label_ip->setText(QCoreApplication::translate("MainWindow", "IP do servidor", nullptr));
         label_Time->setText(QCoreApplication::translate("MainWindow", "Timing", nullptr));
         pushButton_Start->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
         pushButton_Stop->setText(QCoreApplication::translate("MainWindow", "Stop", nullptr));
-        label_TimingVarivael->setText(QCoreApplication::translate("MainWindow", "1", nullptr));
+        label_TimingVariavel->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         pushButton_Connect->setText(QCoreApplication::translate("MainWindow", "Connect", nullptr));
         pushButton_Disconnect->setText(QCoreApplication::translate("MainWindow", "Disconnect", nullptr));
     } // retranslateUi

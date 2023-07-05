@@ -128,7 +128,6 @@ public:
         MainWindow->setStatusBar(statusBar);
 
         retranslateUi(MainWindow);
-        //QObject::connect(horizontalSlider_intervalo, &QSlider::valueChanged, label_intervaloInt, &QLabel::setNum);
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -137,6 +136,7 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         pushButtonGet->setText(QCoreApplication::translate("MainWindow", "getData", nullptr));
+        lineEdit_ip->setText(QCoreApplication::translate("MainWindow", "127.0.0.1", nullptr));
         pushButton_Connect->setText(QCoreApplication::translate("MainWindow", "Connect", nullptr));
         pushButton_Disconnect->setText(QCoreApplication::translate("MainWindow", "Disconnect", nullptr));
         label_min->setText(QCoreApplication::translate("MainWindow", "Min", nullptr));

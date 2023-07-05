@@ -164,6 +164,19 @@
      </rect>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButtonPut">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>330</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -171,7 +184,7 @@
      <x>0</x>
      <y>0</y>
      <width>488</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

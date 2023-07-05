@@ -36,6 +36,9 @@
       <height>24</height>
      </rect>
     </property>
+    <property name="text">
+     <string>127.0.0.1</string>
+    </property>
    </widget>
    <widget class="QTextEdit" name="textEdit_exibidorDeDados">
     <property name="geometry">

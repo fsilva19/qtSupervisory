@@ -8,15 +8,17 @@ MainWindow::MainWindow(QWidget *parent) :
   socket = new QTcpSocket(this);
   tcpConnect();
 
-  connect(ui->pushButtonPut,
+  /*connect(ui->pushButtonPut,
           SIGNAL(clicked(bool)),
           this,
           SLOT(putData()));
-
+*/
+  //H_SLIDER INTERVALO
   connect(ui->horizontalSlider_Timing,
           SIGNAL(valueChanged(int)),
           ui->label_TimingVariavel,
-          SLOT(display(int)));
+          SLOT(setNum(int)));
+
 }
 
 void MainWindow::tcpConnect(){
