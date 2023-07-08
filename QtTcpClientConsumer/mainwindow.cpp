@@ -19,41 +19,34 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(ui->pushButton_Connect,
           SIGNAL(clicked()),
           SLOT(tcpConnect()));
+
   //tcp desconectado:
   connect(ui->pushButton_Disconnect,
           SIGNAL(clicked()),
-          SLOT(tcpConnect()));
+          SLOT(tcpDisconnect()));
 
-  //H_SLIDER MINIMO
-  connect(ui->horizontalSlider_min,
+  //Slider de tempo
+  connect(ui->horizontalSlider_Timing,
           SIGNAL(valueChanged(int)),
-          ui->lcdNumber_min,
-          SLOT(display(int)));
-
-  //H_SLIDER MAXIMO
-  connect(ui->horizontalSlider_max,
-          SIGNAL(valueChanged(int)),
-          ui->lcdNumber_max,
-          SLOT(display(int)));
-
-  //H_SLIDER INTERVALO
-  connect(ui->horizontalSlider_intervalo,
-          SIGNAL(valueChanged(int)),
-          ui->label_intervaloInt,
+          ui->label_TimingVariavel,
           SLOT(setNum(int)));
-
 }
 
 void MainWindow::tcpConnect(){
-  socket->connectToHost(ui->lineEdit_ip->text(),1234);
+  socket->connectToHost(ui->lineEdit_ipServ->text(),1234);
+
   if(socket->waitForConnected(3000)){
-    qDebug() << "Connected";
+      qDebug() << "Connected";
       statusBar()->showMessage("Connected");
   }
   else{
-    qDebug() << "Disconnected";
+      qDebug() << "Disconnected";
       statusBar()->showMessage("Disconnected");
   }
+}
+void MainWindow::tcpDisconnect(){
+  socket->disconnectFromHost();
+  statusBar()->showMessage("Disconnected");
 }
 
 void MainWindow::getData(){
@@ -90,4 +83,3 @@ MainWindow::~MainWindow()
   delete socket;
   delete ui;
 }
-

@@ -17,11 +17,11 @@ public:
   explicit MainWindow(QWidget *parent = 0);
   ~MainWindow();
   
-  void tcpConnect();
 
 public slots:
   void getData();
-  void copia(void);
+  void tcpConnect();
+  void tcpDisconnect();
 private:
   Ui::MainWindow *ui;
   QTcpSocket *socket;
