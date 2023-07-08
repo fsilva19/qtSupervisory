@@ -40,6 +40,29 @@ MainWindow::MainWindow(QWidget *parent) :
           SIGNAL(valueChanged(int)),
           ui->label_intervaloInt,
           SLOT(setNum(int)));
+
+  //Criando variável do tempo min
+  connect(ui->horizontalSlider_min,
+          SIGNAL(valueChanged(int)),
+          this,
+          SLOT(valorMin(int)));
+
+  //Criando variável do tempo max
+  connect(ui->horizontalSlider_max,
+          SIGNAL(valueChanged(int)),
+          this,
+          SLOT(valorMax(int)));
+
+  //Criando variável do intervalo de tempo
+  connect(ui->horizontalSlider_intervalo,
+          SIGNAL(valueChanged(int)),
+          this,
+          SLOT(valorInterv(int)));
+
+  //intervalo start
+  connect(ui->pushButton_start,
+          SIGNAL(clicked()),
+          SLOT(timerEvent()));
 }
 
 void MainWindow::tcpConnect(){
@@ -64,6 +87,21 @@ void MainWindow::tcpDisconnect()
   statusBar()->showMessage("Disconnected");
 }
 
+void MainWindow::valorMin(int vMin)
+{
+  min = vMin;
+}
+
+void MainWindow::valorMax(int vMax)
+{
+  max = vMax;
+}
+
+void MainWindow::valorInterv(int inter)
+{
+  seg = inter;
+}
+
 void MainWindow::putData(){
   QDateTime datetime;
   QString str;
@@ -73,8 +111,8 @@ void MainWindow::putData(){
 
     msecdate = QDateTime::currentDateTime().toMSecsSinceEpoch();
     str = "set "+ QString::number(msecdate) + " " +
-        QString::number(rand()%35)+"\r\n";
-
+          QString::number(rand()%(max-min)+min)+"\r\n";
+    //vMax + vMin
       qDebug() << str;
       qDebug() << socket->write(str.toStdString().c_str())
                << " bytes written";
@@ -88,3 +126,11 @@ MainWindow::~MainWindow(){
   delete socket;
   delete ui;
 }
+
+void MainWindow::timerEvent(QTimerEvent *event)
+{
+  putData();
+}
+
+
+

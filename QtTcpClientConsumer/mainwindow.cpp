@@ -49,6 +49,7 @@ void MainWindow::tcpDisconnect(){
   statusBar()->showMessage("Disconnected");
 }
 
+
 void MainWindow::getData(){
   QString str;
   QByteArray array;
