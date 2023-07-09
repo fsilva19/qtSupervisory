@@ -8,10 +8,19 @@ MainWindow::MainWindow(QWidget *parent) :
   socket = new QTcpSocket(this);
   tcpConnect();
 
-  connect(ui->pushButtonPut,
+
+
+  //botão start
+  connect(ui->pushButton_start,
           SIGNAL(clicked(bool)),
           this,
           SLOT(putData()));
+
+  //botão stop
+  connect(ui->pushButton_stop,
+          SIGNAL(clicked(bool)),
+          this,
+          SLOT(timerStop()));
 
   //tcp conectado:
   connect(ui->pushButton_Connect,
@@ -59,17 +68,18 @@ MainWindow::MainWindow(QWidget *parent) :
           this,
           SLOT(valorInterv(int)));
 
+
+  Timer = new QTimer(this);
   //intervalo start
-  connect(ui->pushButton_start,
-          SIGNAL(clicked()),
+  connect(Timer,
+          SIGNAL(timeout()),
+          this,
           SLOT(timerEvent()));
+  Timer->setInterval(seg*10);
 }
 
 void MainWindow::tcpConnect(){
   socket->connectToHost(ui->lineEdit_ip->text(),1234);
-
-  ui->textEdit_exibidorDeDados->setText(
-      ui->lineEdit_ip->text());
 
   if(socket->waitForConnected(3000)){
     qDebug() << "Connected";
@@ -81,28 +91,26 @@ void MainWindow::tcpConnect(){
   }
 }
 
-void MainWindow::tcpDisconnect()
-{
+void MainWindow::tcpDisconnect(){
   socket->disconnectFromHost();
   statusBar()->showMessage("Disconnected");
 }
 
-void MainWindow::valorMin(int vMin)
-{
+void MainWindow::valorMin(int vMin){
   min = vMin;
 }
 
-void MainWindow::valorMax(int vMax)
-{
+void MainWindow::valorMax(int vMax){
   max = vMax;
 }
 
-void MainWindow::valorInterv(int inter)
-{
+void MainWindow::valorInterv(int inter){
   seg = inter;
+
 }
 
 void MainWindow::putData(){
+  Timer->start();
   QDateTime datetime;
   QString str;
   qint64 msecdate;
@@ -111,8 +119,10 @@ void MainWindow::putData(){
 
     msecdate = QDateTime::currentDateTime().toMSecsSinceEpoch();
     str = "set "+ QString::number(msecdate) + " " +
-          QString::number(rand()%(max-min)+min)+"\r\n";
-    //vMax + vMin
+            QString::number(rand()%(max-min)+min)+"\n";
+
+    ui->textBrowser_exibidor->append(str);
+
       qDebug() << str;
       qDebug() << socket->write(str.toStdString().c_str())
                << " bytes written";
@@ -127,9 +137,13 @@ MainWindow::~MainWindow(){
   delete ui;
 }
 
-void MainWindow::timerEvent(QTimerEvent *event)
-{
+void MainWindow::timerEvent(){
   putData();
+
+}
+
+void MainWindow::timerStop(){
+    Timer->stop();
 }
 
 

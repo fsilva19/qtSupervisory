@@ -5,6 +5,7 @@
 #include <QTcpSocket>
 #include <QDebug>
 #include <QWidget>
+#include <QTimer>
 
 namespace Ui {
 class MainWindow;
@@ -17,7 +18,6 @@ class MainWindow : public QMainWindow
 public:
   explicit MainWindow(QWidget *parent = 0);
   ~MainWindow();
-  void timerEvent(QTimerEvent *event);
 
 public slots:
   void putData();
@@ -28,12 +28,14 @@ public slots:
   void valorMin(int);
   void valorMax(int);
   void valorInterv(int);
+  void timerEvent();
+  void timerStop();
 
 private:
   int min;
   int max;
   int seg;
-
+  QTimer *Timer;
   Ui::MainWindow *ui;
   QTcpSocket *socket;
 };
