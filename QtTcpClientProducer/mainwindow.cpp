@@ -8,8 +8,6 @@ MainWindow::MainWindow(QWidget *parent) :
   socket = new QTcpSocket(this);
   tcpConnect();
 
-
-
   //botão start
   connect(ui->pushButton_start,
           SIGNAL(clicked(bool)),
@@ -66,7 +64,7 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(ui->horizontalSlider_intervalo,
           SIGNAL(valueChanged(int)),
           this,
-          SLOT(valorInterv(int)));
+          SLOT(valorInterv(int v)));
 
 
   Timer = new QTimer(this);
@@ -106,7 +104,6 @@ void MainWindow::valorMax(int vMax){
 
 void MainWindow::valorInterv(int inter){
   seg = inter;
-
 }
 
 void MainWindow::putData(){

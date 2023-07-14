@@ -10,10 +10,17 @@ MainWindow::MainWindow(QWidget *parent) :
   socket = new QTcpSocket(this);
   tcpConnect();
 
-  connect(ui->pushButtonGet,
+  //botão start
+  connect(ui->pushButton_Start,
           SIGNAL(clicked(bool)),
           this,
           SLOT(getData()));
+
+  //botão stop
+  connect(ui->pushButton_Stop,
+          SIGNAL(clicked(bool)),
+          this,
+          SLOT(timerStop()));
 
   //tcp conectado:
   connect(ui->pushButton_Connect,
@@ -25,11 +32,27 @@ MainWindow::MainWindow(QWidget *parent) :
           SIGNAL(clicked()),
           SLOT(tcpDisconnect()));
 
+
+
   //Slider de tempo
   connect(ui->horizontalSlider_Timing,
           SIGNAL(valueChanged(int)),
           ui->label_TimingVariavel,
           SLOT(setNum(int)));
+
+  //Criando variável do intervalo de tempo
+  connect(ui->horizontalSlider_Timing,
+          SIGNAL(valueChanged(int)),
+          this,
+          SLOT(valorInterv(int f)));
+
+  Temp = new QTimer(this);
+  //intervalo start
+  connect(Temp,
+          SIGNAL(timeout()),
+          this,
+          SLOT(timerEvent()));
+  Temp->setInterval(interv*10);
 }
 
 void MainWindow::tcpConnect(){
@@ -49,8 +72,12 @@ void MainWindow::tcpDisconnect(){
   statusBar()->showMessage("Disconnected");
 }
 
+void MainWindow::valorInterv(int inteiro){
+  interv = inteiro;
+}
 
 void MainWindow::getData(){
+  Temp->start();
   QString str;
   QByteArray array;
   QStringList list;
@@ -83,4 +110,10 @@ MainWindow::~MainWindow()
 {
   delete socket;
   delete ui;
+}
+void MainWindow::timerEvent(){
+  getData();
+}
+void MainWindow::timerStop(){
+  Temp->stop();
 }
