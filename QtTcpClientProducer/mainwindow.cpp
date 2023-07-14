@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDateTime>
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent), ui(new Ui::MainWindow){
@@ -64,7 +65,7 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(ui->horizontalSlider_intervalo,
           SIGNAL(valueChanged(int)),
           this,
-          SLOT(valorInterv(int v)));
+          SLOT(valorInterv(int)));
 
 
   Timer = new QTimer(this);
@@ -73,7 +74,7 @@ MainWindow::MainWindow(QWidget *parent) :
           SIGNAL(timeout()),
           this,
           SLOT(timerEvent()));
-  Timer->setInterval(seg*10);
+  Timer->setInterval(seg);
 }
 
 void MainWindow::tcpConnect(){
@@ -103,7 +104,8 @@ void MainWindow::valorMax(int vMax){
 }
 
 void MainWindow::valorInterv(int inter){
-  seg = inter;
+  seg = inter*500;
+  Timer->setInterval(seg);
 }
 
 void MainWindow::putData(){
@@ -119,7 +121,7 @@ void MainWindow::putData(){
             QString::number(rand()%(max-min)+min)+"\n";
 
     ui->textBrowser_exibidor->append(str);
-
+    qDebug() << &Timer << " ";
       qDebug() << str;
       qDebug() << socket->write(str.toStdString().c_str())
                << " bytes written";

@@ -44,7 +44,7 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(ui->horizontalSlider_Timing,
           SIGNAL(valueChanged(int)),
           this,
-          SLOT(valorInterv(int f)));
+          SLOT(valorInterv(int)));
 
   Temp = new QTimer(this);
   //intervalo start
@@ -52,7 +52,7 @@ MainWindow::MainWindow(QWidget *parent) :
           SIGNAL(timeout()),
           this,
           SLOT(timerEvent()));
-  Temp->setInterval(interv*10);
+  Temp->setInterval(interv);
 }
 
 void MainWindow::tcpConnect(){
@@ -73,7 +73,8 @@ void MainWindow::tcpDisconnect(){
 }
 
 void MainWindow::valorInterv(int inteiro){
-  interv = inteiro;
+  interv = inteiro*500;
+  Temp->setInterval(interv);
 }
 
 void MainWindow::getData(){
