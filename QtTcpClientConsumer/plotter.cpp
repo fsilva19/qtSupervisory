@@ -27,15 +27,25 @@ void Plotter::paintEvent(QPaintEvent *event){
     painter.drawRect(0,0,width(), height());
 
     pen.setColor(QColor(25,6,90));
+
+    int width = this->width();
+    int height = this->height();
+
+    double xScale = (width - 2) / (30);
+    double yScale = (height - 2) / (100);
+
     x1 = 0;
-    y1 = 1*height();
-    //y2 = valor;
-    //double m = (double)(height() - y2) / (double)width();
+    y1 = height;
+    y2 = 1;
+    double m = (double)(height - y2) / (double)width;
+
+
+
 
 
     for(int i = 1; i< valor.size(); i++){
-        x2 = i + width()/30;
-        y2 = height() - valor.at(i);
+        x2 = i * xScale;
+        y2 = m*x2 + valor.at(i)*yScale;
 
         QPointF p1(x1, y1);
         QPointF p2(x2,y2);
