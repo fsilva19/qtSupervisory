@@ -64,6 +64,11 @@ MainWindow::MainWindow(QWidget *parent) :
             SIGNAL(clicked()),
             this,
             SLOT(buttonStart()));
+
+    connect(Temp,
+            SIGNAL(timeout()),
+            this,
+            SLOT(buttonStart()));
 }
 
 void MainWindow::tcpConnect(){
