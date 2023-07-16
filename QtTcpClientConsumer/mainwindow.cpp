@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
   ui(new Ui::MainWindow)
 {
-    valores = new QString;
+
     ui->setupUi(this);
     socket = new QTcpSocket(this);
     tcpConnect();
@@ -59,6 +59,11 @@ MainWindow::MainWindow(QWidget *parent) :
           SIGNAL(clicked()),
           this,
           SLOT(updateIp()));
+
+    connect(ui->pushButton_Start,
+            SIGNAL(clicked()),
+            this,
+            SLOT(buttonStart()));
 }
 
 void MainWindow::tcpConnect(){
@@ -108,8 +113,10 @@ void MainWindow::getData(){
           str = list.at(1);
           qDebug() << thetime << ": " << str;
         }
-        valores = &list.at(1);
-        ui->listWidget_maquinas->addItem(*valores);
+
+        valores = list.at(1).toInt();
+        qDebug() << valores << "\n";
+        //ui->listWidget_maquinas->addItem();
       }
     }
     }
@@ -128,6 +135,10 @@ void MainWindow::timerEvent(){
 void MainWindow::updateIp(){
     //ui->listWidget_maquinas->addItem(*valores);
     //ui->listWidget_maquinas->addItem(ui->lineEdit_ipServ->text());
+}
+
+void MainWindow::buttonStart(){
+    ui->widget1->setValor(valores);
 }
 void MainWindow::timerStop(){
     Temp->stop();

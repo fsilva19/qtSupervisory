@@ -31,9 +31,10 @@ public slots:
     void timerStop();
     void timerEvent();
     void updateIp();
+    void buttonStart();
 private:
     int interv;
-    QString *valores;
+    int valores;
     QTimer *Temp;
     Ui::MainWindow *ui;
     QTcpSocket *socket;
