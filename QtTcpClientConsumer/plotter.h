@@ -3,13 +3,15 @@
 
 #include <QWidget>
 #include <QTimer>
+#include <QVector>
 
 class Plotter : public QWidget
 {
     Q_OBJECT
 private:
-    int valor;
+    int *atl;
     QTimer *atual;
+    QVector<int> valor;
 public:
     explicit Plotter(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event);
