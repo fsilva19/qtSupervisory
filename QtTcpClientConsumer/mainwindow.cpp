@@ -100,10 +100,24 @@ void MainWindow::getData(){
     QStringList list;
     qint64 thetime;
     qDebug() << "to get data...";
+    QHostAddress ipAddress = socket->peerAddress();
+    QString ipString = ipAddress.toString();
+
+    // Atualizando a listas de IP's sem repetir.
+    if(ipList.contains(ipString)){
+
+    }else{
+
+      ipList.append(ipString);
+
+    }
     if(socket->state() == QAbstractSocket::ConnectedState){
     if(socket->isOpen()){
       qDebug() << "reading...";
-      socket->write("get 127.0.0.1 5\r\n");
+        QStringList teste;
+        teste << "get" << ipString << "5";
+        QString command = teste.join(' ');
+        socket->write(command.toUtf8());
       socket->waitForBytesWritten();
       socket->waitForReadyRead();
       qDebug() << socket->bytesAvailable();
@@ -136,10 +150,11 @@ MainWindow::~MainWindow()
 void MainWindow::timerEvent(){
     getData();
 }
-
 void MainWindow::updateIp(){
     //ui->listWidget_maquinas->addItem(*valores);
     //ui->listWidget_maquinas->addItem(ui->lineEdit_ipServ->text());
+    ui->listWidget_maquinas->clear();
+    ui->listWidget_maquinas->addItems(ipList);
 }
 
 void MainWindow::buttonStart(){

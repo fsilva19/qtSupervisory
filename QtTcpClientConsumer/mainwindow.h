@@ -33,6 +33,7 @@ public slots:
     void updateIp();
     void buttonStart();
 private:
+    QStringList ipList;
     int interv;
     int valores;
     QTimer *Temp;
