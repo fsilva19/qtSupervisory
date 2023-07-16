@@ -89,7 +89,7 @@ void MainWindow::tcpDisconnect(){
 }
 
 void MainWindow::valorInterv(int inteiro){
-    interv = inteiro*100;
+    interv = inteiro*500;
     Temp->setInterval(interv);
 }
 

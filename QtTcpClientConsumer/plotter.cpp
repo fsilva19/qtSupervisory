@@ -31,21 +31,21 @@ void Plotter::paintEvent(QPaintEvent *event){
     int width = this->width();
     int height = this->height();
 
-    double xScale = (width - 2) / (30);
-    double yScale = (height - 2) / (100);
+    double xScale = (width) / (31);
+    double yScale = (height) / (100);
 
     x1 = 0;
     y1 = height;
-    y2 = 1;
-    double m = (double)(height - y2) / (double)width;
+    //y2 = 1;
+    //double m = (double)(height - y2) / (double)width;
 
 
 
 
 
-    for(int i = 1; i< valor.size(); i++){
+    for(int i = 0; i< valor.size(); i++){
         x2 = i * xScale;
-        y2 = m*x2 + valor.at(i)*yScale;
+        y2 = height - valor.at(i)*yScale;
 
         QPointF p1(x1, y1);
         QPointF p2(x2,y2);
@@ -53,6 +53,9 @@ void Plotter::paintEvent(QPaintEvent *event){
 
         x1 = x2;
         y1 = y2;
+        if(valor.size() >= 34){
+            valor.erase(valor.begin());
+        }
     }
 
 }
