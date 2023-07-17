@@ -69,6 +69,11 @@ MainWindow::MainWindow(QWidget *parent) :
             SIGNAL(timeout()),
             this,
             SLOT(buttonStart()));
+
+    connect(ui->listWidget_maquinas,
+            &QListWidget::itemClicked,
+            this,
+            &MainWindow::itemClicked);
 }
 
 void MainWindow::tcpConnect(){
@@ -96,9 +101,9 @@ void MainWindow::valorInterv(int inteiro){
 void MainWindow::getData(){
     Temp->start();
     QString str;
-    QByteArray array;
+    //QByteArray array;
     QStringList list;
-    qint64 thetime;
+    //qint64 thetime;
     qDebug() << "to get data...";
     QHostAddress ipAddress = socket->peerAddress();
     QString ipString = ipAddress.toString();
@@ -120,21 +125,21 @@ void MainWindow::getData(){
         socket->write(command.toUtf8());
       socket->waitForBytesWritten();
       socket->waitForReadyRead();
-      qDebug() << socket->bytesAvailable();
+      //qDebug() << socket->bytesAvailable();
       while(socket->bytesAvailable()){
         str = socket->readLine().replace("\n","").replace("\r","");
 
         list = str.split(" ");
         if(list.size() == 2){
-          bool ok;
+          //bool ok;
           str = list.at(0);
-          thetime = str.toLongLong(&ok);
+          //thetime = str.toLongLong(&ok);
           str = list.at(1);
-          qDebug() << thetime << ": " << str;
+          //qDebug() << thetime << ": " << str;
         }
 
         valores = list.at(1).toInt();
-        qDebug() << valores << "\n";
+        //qDebug() << valores << "\n";
         //ui->listWidget_maquinas->addItem();
       }
     }
@@ -162,4 +167,24 @@ void MainWindow::buttonStart(){
 }
 void MainWindow::timerStop(){
     Temp->stop();
+}
+
+void MainWindow::itemClicked(QListWidgetItem* item) {
+    QString selectedItem = item->text();
+    // Realize a ação desejada com o item selecionado
+
+    tcpDisconnect();
+
+    socket->connectToHost(selectedItem,1234);
+
+    if(socket->waitForConnected(3000)){
+    qDebug() << "Connected";
+    statusBar()->showMessage("Connected");
+    }
+    else{
+    qDebug() << "Disconnected";
+    statusBar()->showMessage("Disconnected");
+    }
+
+    qDebug() << "Item clicado: " << selectedItem;
 }

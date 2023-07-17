@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "qlistwidget.h"
 #include <QMainWindow>
 #include <QTcpSocket>
 #include <QDebug>
@@ -32,7 +33,10 @@ public slots:
     void timerEvent();
     void updateIp();
     void buttonStart();
+private slots:
+    void itemClicked(QListWidgetItem* item);
 private:
+
     QStringList ipList;
     int interv;
     int valores;
